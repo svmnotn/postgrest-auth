@@ -1,0 +1,16 @@
+[package]
+name = "postgrest-auth"
+version = "0.1.0"
+description = "An authentication server for PostgREST"
+homepage = "https://github.com/svmnotn/postgrest-auth"
+repository = "svmnotn/postgrest-auth"
+readme = "README.md"
+license = "MIT"
+keywords = ["postgrest", "postgres", "authentication", 
+            "server", "http", "web", "rest"]
+authors = ["Victor M. Suarez <svmnotn@gmail.com>"]
+
+[dependencies]
+clap     = "1.5"
+regex    = "0.1"
+postgres = "0.10"
