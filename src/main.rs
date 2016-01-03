@@ -3,6 +3,10 @@
 extern crate clap;
 use clap::App;
 
+extern crate iron;
+use iron::prelude::*;
+use iron::status;
+
 fn main() {
   // Create what is used to interpretate user input from the CLI
   let matches = App::new("postgrest-auth")
@@ -32,8 +36,9 @@ fn main() {
                                     --jwt-secret=[secret]          -j 'The secret to use when encrypting JWTs. Defaults to secret'
                                     --camelcase                    -c 'Camelcases everything in the REST interface'")
                   .get_matches();
+  // Get CLI Options
   let url = value_t_or_exit!(matches.value_of("url"), String);
-  let port = value_t!(matches.value_of("number"), usize).unwrap_or(3001);
+  let port = value_t!(matches.value_of("number"), &str).unwrap_or("3001");
   let user = value_t!(matches.value_of("uRelation"), String).unwrap_or("postgrest.users".to_string());
   let refresh = value_t!(matches.value_of("rRelation"), String).unwrap_or("postgrest.refresh".to_string());
   let issuer = value_t!(matches.value_of("role"), String);
@@ -41,4 +46,9 @@ fn main() {
   let expire = value_t!(matches.value_of("time"), String).unwrap_or("30m".to_string());
   let secret = value_t!(matches.value_of("secret"), String).unwrap_or("secret".to_string());
   let camelcase = matches.is_present("camelcase");
+  // Start the server
+  let server = Iron::new(|_: &mut Request| {
+        Ok(Response::with((status::Ok, "Hello World!")))
+  }).http(String::from("localhost:") + port).unwrap();
+
 }

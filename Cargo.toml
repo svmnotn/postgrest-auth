@@ -6,7 +6,7 @@ homepage = "https://github.com/svmnotn/postgrest-auth"
 repository = "svmnotn/postgrest-auth"
 readme = "README.md"
 license = "MIT"
-keywords = ["postgrest", "postgres", "authentication", 
+keywords = ["postgrest", "postgres", "authentication",
             "server", "http", "web", "rest"]
 authors = ["Victor M. Suarez <svmnotn@gmail.com>"]
 
@@ -14,3 +14,4 @@ authors = ["Victor M. Suarez <svmnotn@gmail.com>"]
 clap     = "1.5"
 regex    = "0.1"
 postgres = "0.10"
+iron     = "0.2"
