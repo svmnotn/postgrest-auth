@@ -5,3 +5,4 @@ normalise_comments = false
 format_strings = false
 fn_call_width = 100
 fn_single_line = true
+newline_style = "Unix"
