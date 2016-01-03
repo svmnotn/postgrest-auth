@@ -38,7 +38,7 @@ fn main() {
                   .get_matches();
   // Get CLI Options
   let url = value_t_or_exit!(matches.value_of("url"), String);
-  let port = value_t!(matches.value_of("number"), &str).unwrap_or("3001");
+  let port = value_t!(matches.value_of("number"), String).unwrap_or(String::from("3001"));
   let user = value_t!(matches.value_of("uRelation"), String).unwrap_or("postgrest.users".to_string());
   let refresh = value_t!(matches.value_of("rRelation"), String).unwrap_or("postgrest.refresh".to_string());
   let issuer = value_t!(matches.value_of("role"), String);
@@ -47,8 +47,9 @@ fn main() {
   let secret = value_t!(matches.value_of("secret"), String).unwrap_or("secret".to_string());
   let camelcase = matches.is_present("camelcase");
   // Start the server
-  let server = Iron::new(|_: &mut Request| {
-        Ok(Response::with((status::Ok, "Hello World!")))
-  }).http(String::from("localhost:") + port).unwrap();
+  let connection: &str = &(String::from("localhost:") + &port);
+  let server = Iron::new(|_: &mut Request| Ok(Response::with((status::Ok, "Hello World!"))))
+                 .http(connection)
+                 .unwrap();
 
 }
