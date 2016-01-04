@@ -11,7 +11,9 @@ keywords = ["postgrest", "postgres", "authentication",
 authors = ["Victor M. Suarez <svmnotn@gmail.com>"]
 
 [dependencies]
-clap     = "1.5"
-regex    = "0.1"
-postgres = "0.10"
-iron     = "0.2"
+clap       = "1.5"
+regex      = "0.1"
+postgres   = "0.10"
+iron       = "0.2"
+serde_json = "0.6"
+jwt        = "0.4"

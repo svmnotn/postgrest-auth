@@ -7,6 +7,9 @@ extern crate iron;
 use iron::prelude::*;
 use iron::status;
 
+extern crate serde_json;
+extern crate jwt;
+
 fn main() {
   // Create what is used to interpretate user input from the CLI
   let matches = App::new("postgrest-auth")
@@ -48,8 +51,9 @@ fn main() {
   let camelcase = matches.is_present("camelcase");
   // Start the server
   let connection: &str = &(String::from("localhost:") + &port);
-  let server = Iron::new(|_: &mut Request| Ok(Response::with((status::Ok, "Hello World!"))))
-                 .http(connection)
-                 .unwrap();
-
+  let server = Iron::new(|req: &mut Request| {
+    println!("REQUEST!: {}", req);
+    Ok(Response::with((status::Ok, "Hello World!")))
+  }).http(connection)
+    .unwrap();
 }
