@@ -16,7 +16,7 @@ fn main() {
     .version(&crate_version!())
     .global_version(true)
     .unified_help_message(true)
-    .author("Victor M. Suarez <svmnotn@gmail.com>")
+    .author("Victor M. Suarez <svmnotn@gmail.com>, Caleb Meredith <calebmeredith8@gmail.com>")
     .about("An authentication server for PostgREST")
     .args_from_usage(
      "<URL>                           'a PostgreSQL database connection string'
