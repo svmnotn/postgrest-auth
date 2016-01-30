@@ -1,7 +1,7 @@
 #![allow(dead_code, unused_variables, unused_imports)]
 #[macro_use]
 extern crate clap;
-use clap::App;
+use clap::{App, AppSettings};
 
 extern crate iron;
 use iron::prelude::*;
