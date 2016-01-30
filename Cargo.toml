@@ -11,7 +11,7 @@ keywords = ["postgrest", "postgres", "authentication",
 authors = ["Victor M. Suarez <svmnotn@gmail.com>"]
 
 [dependencies]
-clap       = "1.5"
+clap       = "2.0"
 regex      = "0.1"
 postgres   = "0.10"
 iron       = "0.2"

@@ -13,11 +13,10 @@ extern crate jwt;
 fn main() {
   // Create what is used to interpretate user input from the CLI
   let matches = App::new("postgrest-auth")
-    .version(&crate_version!())
-    .global_version(true)
-    .unified_help_message(true)
+    .version(crate_version!())
     .author("Victor M. Suarez <svmnotn@gmail.com>, Caleb Meredith <calebmeredith8@gmail.com>")
     .about("An authentication server for PostgREST")
+    .settings(&[AppSettings::GlobalVersion, AppSettings::UnifiedHelpMessage])
     .args_from_usage(
      "<URL>                           'a PostgreSQL database connection string'
       --port=[PORT]                -p 'The port on which the server will listen for HTTP requests. Defaults to 3001.'
@@ -32,13 +31,13 @@ fn main() {
 
   // Get CLI Options
   let url = value_t_or_exit!(matches.value_of("URL"), String);
-  let port = value_t!(matches.value_of("PORT"), String).unwrap_or(String::from("3001"));
-  let user = value_t!(matches.value_of("USER"), String).unwrap_or("postgrest.users".to_string());
-  let refresh = value_t!(matches.value_of("REFRESH"), String).unwrap_or("postgrest.refresh".to_string());
-  let issuer = value_t!(matches.value_of("ISSUER"), String);
-  let regex = value_t!(matches.value_of("PASS"), String).unwrap_or(".{6,}".to_string());
-  let expire = value_t!(matches.value_of("EXPIRE"), String).unwrap_or("30m".to_string());
-  let secret = value_t!(matches.value_of("SECRET"), String).unwrap_or("secret".to_string());
+  let port = value_t!(matches.value_of("port"), String).unwrap_or(String::from("3001"));
+  let user = value_t!(matches.value_of("user-relation"), String).unwrap_or("postgrest.users".to_string());
+  let refresh = value_t!(matches.value_of("refresh-relation"), String).unwrap_or("postgrest.refresh".to_string());
+  let issuer = value_t!(matches.value_of("grant-issuer"), String);
+  let regex = value_t!(matches.value_of("pass-regex"), String).unwrap_or(".{6,}".to_string());
+  let expire = value_t!(matches.value_of("jwt-expire"), String).unwrap_or("30m".to_string());
+  let secret = value_t!(matches.value_of("jwt-secret"), String).unwrap_or("secret".to_string());
   let camelcase = matches.is_present("camelcase");
   // Start the server
   let connection: &str = &(String::from("localhost:") + &port);
